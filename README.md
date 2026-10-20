@@ -17,6 +17,17 @@ iTerm2 truncates sequences that long.
 
 ## Install
 
+On Linux or macOS, without root, into `~/.local/bin`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/moncho/osc52/main/install.sh | sh
+```
+
+The script downloads the static binary for your architecture from the latest
+release and checks it against its SHA-256 before installing. Set
+`OSC52_INSTALL_DIR` to install elsewhere, or `OSC52_VERSION` (such as
+`v0.3.0`) to install a specific release.
+
 With Homebrew, on macOS or Linux:
 
 ```sh
