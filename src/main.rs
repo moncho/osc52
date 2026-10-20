@@ -12,6 +12,7 @@ Works over SSH and inside tmux or screen.
 Usage:
   osc52 [TEXT]...   copy the arguments, joined by spaces
   cmd | osc52       copy standard input
+  osc52 --version   print the version
 ";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -37,6 +38,10 @@ fn main() -> ExitCode {
     let args: Vec<String> = env::args().skip(1).collect();
     if args.iter().any(|a| a == "-h" || a == "--help") {
         print!("{USAGE}");
+        return ExitCode::SUCCESS;
+    }
+    if args.iter().any(|a| a == "-V" || a == "--version") {
+        println!("osc52 {}", env!("CARGO_PKG_VERSION"));
         return ExitCode::SUCCESS;
     }
 

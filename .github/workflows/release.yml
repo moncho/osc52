@@ -22,8 +22,14 @@ jobs:
         include:
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
+            arch: amd64
+            rpm_arch: x86_64
+            nfpm: Linux_x86_64
           - target: aarch64-unknown-linux-musl
             os: ubuntu-24.04-arm
+            arch: arm64
+            rpm_arch: aarch64
+            nfpm: Linux_arm64
           - target: x86_64-apple-darwin
             os: macos-latest
           - target: aarch64-apple-darwin
@@ -43,3 +49,18 @@ jobs:
           gh release upload "$GITHUB_REF_NAME" "$asset" "$asset.sha256" -R "$GITHUB_REPOSITORY"
         env:
           GH_TOKEN: ${{ github.token }}
+      - name: Upload deb and rpm
+        if: matrix.arch
+        run: |
+          curl -fsSL "https://github.com/goreleaser/nfpm/releases/download/v${NFPM_VERSION}/nfpm_${NFPM_VERSION}_${{ matrix.nfpm }}.tar.gz" | tar -xz nfpm
+          cp "target/${{ matrix.target }}/release/osc52" osc52
+          mkdir dist
+          export ARCH=${{ matrix.arch }} VERSION="${GITHUB_REF_NAME#v}"
+          ./nfpm pkg --packager deb --target dist/osc52_${{ matrix.arch }}.deb
+          ./nfpm pkg --packager rpm --target dist/osc52.${{ matrix.rpm_arch }}.rpm
+          cd dist
+          for pkg in *; do shasum -a 256 "$pkg" > "$pkg.sha256"; done
+          gh release upload "$GITHUB_REF_NAME" * -R "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NFPM_VERSION: 2.48.0

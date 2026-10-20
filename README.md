@@ -14,7 +14,26 @@ stdout is redirected.
 
 ## Install
 
-Download a binary for your platform from the
+With Homebrew, on macOS or Linux:
+
+```sh
+brew install moncho/tap/osc52
+```
+
+On Debian, Ubuntu and other `.deb` distributions (use `arm64` for ARM):
+
+```sh
+curl -fLO https://github.com/moncho/osc52/releases/latest/download/osc52_amd64.deb
+sudo apt install ./osc52_amd64.deb
+```
+
+On Fedora, RHEL and other `dnf`-based distributions (use `aarch64` for ARM):
+
+```sh
+sudo dnf install https://github.com/moncho/osc52/releases/latest/download/osc52.x86_64.rpm
+```
+
+Or download a binary for your platform from the
 [latest release](https://github.com/moncho/osc52/releases/latest):
 `osc52-x86_64-unknown-linux-musl`, `osc52-aarch64-unknown-linux-musl`,
 `osc52-x86_64-apple-darwin` or `osc52-aarch64-apple-darwin`. Each has a

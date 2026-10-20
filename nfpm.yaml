@@ -1,0 +1,15 @@
+name: osc52
+arch: ${ARCH}
+platform: linux
+version: ${VERSION}
+maintainer: moncho <50428+moncho@users.noreply.github.com>
+description: Copy text to the clipboard through the terminal with OSC 52
+homepage: https://github.com/moncho/osc52
+license: MIT
+contents:
+  - src: osc52
+    dst: /usr/bin/osc52
+    file_info:
+      mode: 0755
+  - src: LICENSE
+    dst: /usr/share/licenses/osc52/LICENSE
