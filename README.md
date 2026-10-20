@@ -2,7 +2,8 @@
 
 Copy text to the system clipboard through the terminal with the OSC 52
 escape sequence. Because the terminal does the copying, it works over SSH
-and inside tmux or screen. No dependencies beyond the Rust standard library.
+and inside tmux or screen. It is built without the Rust standard library and
+links only libc, so the binary is about 50 KB.
 
 ```sh
 osc52 some text          # copy the arguments, joined by spaces
