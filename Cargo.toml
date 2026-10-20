@@ -1,0 +1,14 @@
+[package]
+name = "osc52"
+version = "0.1.0"
+edition = "2024"
+description = "Copy text to the system clipboard through the terminal with OSC 52"
+license = "MIT"
+repository = "https://github.com/moncho/osc52"
+
+[dependencies]
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
