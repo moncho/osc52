@@ -11,7 +11,9 @@ git rev-parse HEAD | osc52   # copy standard input
 ```
 
 The sequence is written to `/dev/tty`, so it reaches the terminal even when
-stdout is redirected.
+stdout is redirected. Inside screen it is split into pieces that fit screen's
+string limit. Over 1 MB, `osc52` still sends it but warns: tmux drops and
+iTerm2 truncates sequences that long.
 
 ## Install
 
@@ -58,6 +60,17 @@ cargo install --git https://github.com/moncho/osc52
 
 Your terminal must allow OSC 52 clipboard writes. Ghostty, kitty, WezTerm,
 iTerm2 and Alacritty support it; some need it enabled in their settings.
+GNOME Terminal and other VTE-based terminals do not.
+
+To ask the terminal, run this outside tmux and screen:
+
+```sh
+osc52 --check
+```
+
+It exits 0 when the terminal says it supports OSC 52, 1 when it does not, and
+2 when it cannot tell. Some terminals, such as Alacritty and Konsole, support
+OSC 52 without saying so; copy something and paste it to find out.
 
 In tmux, enable passthrough:
 

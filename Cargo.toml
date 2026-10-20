@@ -1,6 +1,6 @@
 [package]
 name = "osc52"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 description = "Copy text to the system clipboard through the terminal with OSC 52"
 license = "MIT"
