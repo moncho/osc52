@@ -23,10 +23,24 @@ On Linux or macOS, without root, into `~/.local/bin`:
 curl -fsSL https://raw.githubusercontent.com/moncho/osc52/main/install.sh | sh
 ```
 
+Without curl, as on Alpine:
+
+```sh
+wget -qO- https://raw.githubusercontent.com/moncho/osc52/main/install.sh | sh
+```
+
 The script downloads the static binary for your architecture from the latest
 release and checks it against its SHA-256 before installing. Set
-`OSC52_INSTALL_DIR` to install elsewhere, or `OSC52_VERSION` (such as
-`v0.3.0`) to install a specific release.
+`OSC52_INSTALL_DIR` to install elsewhere, or `OSC52_VERSION` to install a
+specific release, on the `sh` side of the pipe:
+
+```sh
+# a specific release
+curl -fsSL https://raw.githubusercontent.com/moncho/osc52/main/install.sh | OSC52_VERSION=v0.3.0 sh
+
+# system-wide, into /usr/local/bin
+curl -fsSL https://raw.githubusercontent.com/moncho/osc52/main/install.sh | sudo OSC52_INSTALL_DIR=/usr/local/bin sh
+```
 
 With Homebrew, on macOS or Linux:
 
